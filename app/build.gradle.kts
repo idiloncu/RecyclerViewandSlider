@@ -38,7 +38,10 @@ android {
 dependencies {
     val exoplayerVersion by extra { "2.18.5" }
     implementation("com.google.android.exoplayer:exoplayer:$exoplayerVersion")
-
+    // dependency for slider view
+   // implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
+    implementation ("com.github.smarteist:autoimageslider:1.4.0")
+    implementation ("com.github.smarteist:autoimageslider:1.4.0-appcompat")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
