@@ -4,15 +4,24 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <TextView
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/playerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="hello"/>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imageView"
-        />
+        android:background="@color/black"
+        app:resize_mode="fit"
+        app:show_buffering="never"
+        app:show_fastforward_button="false"
+        app:show_next_button="false"
+        app:show_previous_button="false"
+        app:show_rewind_button="false"
+        app:show_subtitle_button="false"
+        app:surface_type="texture_view"
+        app:use_artwork="true"
+        app:use_controller="false" />
+
+
 
 
 

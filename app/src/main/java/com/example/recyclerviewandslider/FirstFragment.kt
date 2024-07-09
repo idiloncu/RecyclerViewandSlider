@@ -14,35 +14,13 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    //    binding.viewPager.layoutManager = GridLayoutManager(requireContext(), 2)
+        //    binding.viewPager.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.viewPager.adapter = sliderAdapterEg
-        val viewPagerList = listOf(SliderItems(R.drawable.ic_launcher_foreground),SliderItems(R.drawable.ic_launcher_foreground))
-        val adapterList = listOf(
-            ModelClass(
-                1,
-                listOf(
-                    "https://placehold.co/1920x1080/orange/white",
-                    "https://placehold.co/1920x1080/white/orange"
-                ),
-                "asd"
-            ),
-            ModelClass(
-                2,
-                listOf(
-                    "https://placehold.co/1920x1080/red/white",
-                    "https://placehold.co/1920x1080/white/red"
-                ),
-                "asd"
-            ),
-            ModelClass(
-                3,
-                listOf(
-                    "https://placehold.co/1920x1080/yellow/white",
-                    "https://placehold.co/1920x1080/white/yellow"
-                ),
-                "asd"
-            )
+        val viewPagerList = listOf(
+            SliderItems(R.drawable.ic_launcher_foreground,"https://videos.pexels.com/video-files/1093662/1093662-hd_1920_1080_30fps.mp4"),
+            SliderItems(R.drawable.ic_launcher_foreground,"https://videos.pexels.com/video-files/2759477/2759477-uhd_2560_1440_30fps.mp4")
         )
+
 
         sliderAdapterEg.submitList(viewPagerList)
 

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
 }
 
 android {
@@ -39,11 +40,12 @@ android {
 }
 
 dependencies {
+    val glideVersion by extra { "4.15.1" }
     val exoplayerVersion by extra { "2.18.5" }
     implementation("com.google.android.exoplayer:exoplayer:$exoplayerVersion")
-    // dependency for slider view
-  // implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
-  //  implementation (libs.autoimageslider.v140)
+    //dependency for slider view
+    //implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
+    //implementation (libs.autoimageslider.v140)
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation ("com.makeramen:roundedimageview:2.3.0")
 
