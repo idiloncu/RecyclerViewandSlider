@@ -1,6 +1,5 @@
 package com.example.recyclerviewandslider
 
-import android.media.Image
 import androidx.annotation.DrawableRes
 
 

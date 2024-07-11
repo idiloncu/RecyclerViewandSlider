@@ -1,7 +1,9 @@
 package com.example.recyclerviewandslider
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -9,24 +11,57 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewandslider.databinding.ItemFolderBinding
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.PlaybackException
+import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Player.REPEAT_MODE_ONE
+import com.google.android.exoplayer2.source.dash.DashMediaSource
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import kotlinx.coroutines.withContext
 
 class SliderAdapterEg : ListAdapter<SliderItems, SliderAdapterEg.SliderAdapterVH>(ModelClassDiff){
 
     inner class SliderAdapterVH(private val binding: ItemFolderBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(sliderItems: SliderItems){
-           // binding.imageView.setImageDrawable(ContextCompat.getDrawable(itemView.context,sliderItems.image))
+           //binding.imageView.setImageDrawable(ContextCompat.getDrawable(itemView.context,sliderItems.image))
             val exoPlayer = ExoPlayer.Builder(itemView.context).build()
             val mediaItem = MediaItem.fromUri(sliderItems.video_url)
             binding.playerView.player = exoPlayer
             exoPlayer.setMediaItem(mediaItem)
             exoPlayer.prepare()
-            exoPlayer.playWhenReady = true
+           // val defaultHttpDataSourceFactory = DefaultHttpDataSource.Factory()
+            //exoPlayer?.seekTo(10)
+            exoPlayer?.playWhenReady = true
             exoPlayer.repeatMode = REPEAT_MODE_ONE
+            exoPlayer.addListener(object:Player.Listener{
+               override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
+                    super.onPlayerStateChanged(playWhenReady, playbackState)
+                    val durationMs = exoPlayer.contentDuration
+                    val durationSec = durationMs / 100
+                    Log.d("Exoplayer","Süre:${durationSec} saniye")
 
+                }
+            })
+            exoPlayer.addListener(object :Player.Listener{
+                override fun onPlaybackStateChanged(playbackState: Int) {
+                    super.onPlaybackStateChanged(playbackState)
+                    if (playbackState == Player.STATE_ENDED){
+                        val nextPosition = bindingAdapterPosition + 1
+                        if (nextPosition < currentList.size){
+                            val nextItem =getItem(nextPosition)
+                            val nextMediaItem = MediaItem.fromUri(nextItem.video_url)
+                            exoPlayer.setMediaItem(nextMediaItem)
+                            exoPlayer.prepare()
+                            exoPlayer.playWhenReady = true
+
+                        }
+
+                    }
+                }
+            })
 
             }
         }
+
     object ModelClassDiff:DiffUtil.ItemCallback<SliderItems>(){
         override fun areItemsTheSame(oldItem: SliderItems, newItem: SliderItems): Boolean {
             return oldItem == newItem
@@ -43,5 +78,6 @@ class SliderAdapterEg : ListAdapter<SliderItems, SliderAdapterEg.SliderAdapterVH
     override fun onBindViewHolder(holder: SliderAdapterVH, position: Int) {
         holder.bind(currentList[position])
     }
+
 
 }
