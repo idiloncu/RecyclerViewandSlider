@@ -15,6 +15,7 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Player.REPEAT_MODE_ONE
+import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.dash.DashMediaSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import kotlinx.coroutines.withContext
@@ -47,19 +48,6 @@ class SliderAdapterEg : ListAdapter<SliderItems, SliderAdapterEg.SliderAdapterVH
                 }
             }
             handler.post(runnable)
-
-
-           // exoPlayer.repeatMode = REPEAT_MODE_ONE
-            /*
-            exoPlayer.addListener(object:Player.Listener{
-               override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-                    super.onPlayerStateChanged(playWhenReady, playbackState)
-                    val durationMs = exoPlayer.contentDuration
-                    val durationSec = durationMs / 100
-                    Log.d("Exoplayer","Süre:${durationSec} saniye")
-                }
-            })
-             */
 
             exoPlayer.addListener(object :Player.Listener{
                 override fun onPlaybackStateChanged(playbackState: Int) {
