@@ -29,16 +29,7 @@ class VideoPreLoadService:IntentService(VideoPreLoadService::class.java.simpleNa
     private lateinit var cacheDataSourceFactory: CacheDataSource
     private val simpleCache:SimpleCache=MyApp.simpleCache
     var videoUrl: String? = null
-
     val videoUri = Uri.parse(videoUrl)
-
-    val progressListener =
-        CacheWriter.ProgressListener { requestLength, bytesCached, newBytesCached ->
-            val downloadPercentage: Double = (bytesCached * 100.0
-                    / requestLength)
-
-            Log.d(TAG, "downloadPercentage $downloadPercentage videoUri: $videoUri")
-        }
 
     override fun onHandleIntent(p0: Intent?) {
         mContext = applicationContext
@@ -91,10 +82,16 @@ class VideoPreLoadService:IntentService(VideoPreLoadService::class.java.simpleNa
         dataSpec: DataSpec,progressListener: CacheWriter.ProgressListener
     ) {
         runCatching {
+            val progressListener =
+                CacheWriter.ProgressListener { requestLength, bytesCached, newBytesCached ->
+                    val downloadPercentage: Double = (bytesCached * 100.0
+                            / requestLength)
+
+                    Log.d(TAG, "downloadPercentage $downloadPercentage videoUri: $videoUri")
+                }
             CacheWriter(
                 cacheDataSourceFactory,
                 dataSpec,
-                true,
                 null,
                 progressListener,
             ).cache()

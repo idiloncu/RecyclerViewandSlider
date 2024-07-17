@@ -1,5 +1,6 @@
 package com.example.recyclerviewandslider
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -19,6 +20,14 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
             SliderItems(R.drawable.ic_launcher_foreground,"https://videos.pexels.com/video-files/26781688/12006409_2560_1440_24fps.mp4"),
             SliderItems(R.drawable.ic_launcher_foreground,"https://videos.pexels.com/video-files/26707403/11989977_2560_1440_25fps.mp4")
         )
+
         sliderAdapterEg.submitList(viewPagerList)
+        //her video bıttgınde state ende dustugunde handler post delyaed yapısı yardımızyla control sagla
+        //bir Scroll ekle
+    }
+    private fun startPreLoadingService() {
+        val preloadingServiceIntent = Intent(context, VideoPreLoadService::class.java)
+       // preloadingServiceIntent.putStringArrayListExtra(Constants.VIDEO_LIST,viewPagerList)
+        context?.startService(preloadingServiceIntent)
     }
 }

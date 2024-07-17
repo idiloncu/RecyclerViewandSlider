@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),HomeScreenCallback {
     private val binding by viewBinding(ActivityMainBinding::inflate)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,4 +28,12 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
+    override fun openVideoPlayScreen(videoUrl: String) {
+        val bundle = Bundle()
+        bundle.putString(Constants.VIDEO_URL,videoUrl)
+
+    }
+
+
 }
