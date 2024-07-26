@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
-import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DataSpec
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
@@ -53,7 +52,6 @@ class VideoPreLoadService:IntentService(VideoPreLoadService::class.java.simpleNa
         }
     }
     private fun preCacheVideo(arrayList: ArrayList<String>?){
-        //var videoUrl: String? = null
         if (!videoList.isNullOrEmpty()){
             videoUrl = videoList!![0]
             videoList!!.removeAt(0)

@@ -21,7 +21,6 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import kotlinx.coroutines.withContext
 
 class SliderAdapterEg : ListAdapter<SliderItems, SliderAdapterEg.SliderAdapterVH>(ModelClassDiff){
-
     inner class SliderAdapterVH(private val binding: ItemFolderBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(sliderItems: SliderItems){
             val exoPlayer = ExoPlayer.Builder(itemView.context).build()
@@ -66,12 +65,10 @@ class SliderAdapterEg : ListAdapter<SliderItems, SliderAdapterEg.SliderAdapterVH
             })
             }
         }
-
     override fun onViewRecycled(holder: SliderAdapterVH) {
         super.onViewRecycled(holder)
 
     }
-
     object ModelClassDiff:DiffUtil.ItemCallback<SliderItems>(){
         override fun areItemsTheSame(oldItem: SliderItems, newItem: SliderItems): Boolean {
             return oldItem == newItem
